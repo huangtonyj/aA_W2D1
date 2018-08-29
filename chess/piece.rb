@@ -1,8 +1,6 @@
-# require 'singleton'
+require 'singleton'
  
 class Piece
-  # include 'singleton'
-  
   attr_accessor :pos
   attr_reader :color
   
@@ -13,15 +11,16 @@ class Piece
   end
   
   def to_s
-    "_"
+    " "
   end
-  
 end
 
 
 class NullPiece < Piece 
-  def initialize(color, board, pos)
-    super(nil, board, nil)
+  include Singleton
+  
+  def initialize
+    super(nil, nil, nil)
   end
   
   def moves 
@@ -30,16 +29,69 @@ class NullPiece < Piece
   def symbol
   end 
   
+  def inspect
+    "|_____|"
+  end
+  
 end
 
-class Queen < Piece
+class King < Piece
   
   def initialize(color, board, pos)
     super(color, board, pos)
-    @board[pos] = self
-  end
+    @board[pos] = self 
+  end 
   
   def to_s
-    "Q"
-  end
-end
+    "K"
+  end 
+end 
+
+class Rook < Piece
+
+  def initialize(color, board, pos)
+    super(color, board, pos)
+    @board[pos] = self 
+  end 
+
+  def to_s
+    "R"
+  end 
+end  
+
+# class Bishop < Piece
+# 
+#   def initialize(color, board, pos)
+#     super(color, board, pos)
+#     @board[pos] = self 
+#   end 
+# 
+#   def to_s
+#     "B"
+#   end 
+# end 
+
+class Knight < Piece
+  
+  def initialize(color, board, pos)
+    super(color, board, pos)
+    @board[pos] = self 
+  end 
+  
+  def to_s
+    "Kn"
+  end 
+end 
+
+class Pawn < Piece
+  
+  def initialize(color, board, pos)
+    super(color, board, pos)
+    @board[pos] = self 
+  end 
+  
+  def to_s
+    "P"
+  end 
+end 
+  
